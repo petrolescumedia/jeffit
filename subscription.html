@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="CSS/navigation.css">
+        <!-- Add more stylesheets here -->
+    
+        <!-- Fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Koulen' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=DM Sans' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Mountains of Christmas' rel='stylesheet'>
+    
+        <!-- External Libraries -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.css">
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+    
+        <title>Acasa</title>
+    </head>
+    <body>
+        <!--=============== HEADER ===============-->
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="#" class="nav__logo">Jeffit</a>
+            <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        
+                        <li class="nav__item">
+                            <a href="news.html" class="nav__link">
+                              <i class='bx bx-news nav__icon' ></i>
+                            </a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="news.html" class="nav__link">
+                                <i class='bx bxs-heart nav__icon' ></i>
+                            </a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="home.html" class="nav__link">
+                                <i class='bx bx-home-alt nav__icon'></i>
+                            </a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="subscription.html" class="nav__link active-link">
+                                <i class='bx bx-wallet nav__icon'></i>
+                            </a>
+                        </li>
+
+                        <li class="nav__item">
+                            <a href="about.html" class="nav__link">
+                                <i class='bx bx-question-mark nav__icon'></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <img src="https://cdn-icons-png.flaticon.com/128/12164/12164962.png" alt="" class="nav__img">
+            </nav>
+        </header>
+        <br>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stare Abonament</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #0096FF;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            width: 95%;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #005e91; /* Dark Blue */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .callout {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .expired {
+            background-color: #FF5A5A;
+            color: white;
+        }
+
+        .available {
+            background-color: #71C671;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<br><br><br>
+    <h1>Status Abonament</h1>
+    <br>
+    <form id="subscriptionCheckForm">
+        <label for="username">Introducu numele tau de utilizator:</label>
+        <br><br>
+        <input type="text" id="username" required>
+        <br>
+        <button type="button" onclick="checkSubscription()">Verifica Abonamentul</button>
+    </form>
+
+    <div id="result" class="callout"></div>
+
+<!-- ... your existing HTML code ... -->
+
+<script>
+    function checkSubscription() {
+        var username = document.getElementById('username').value;
+
+        fetch('DATA/parole.json')
+            .then(response => response.json())
+            .then(data => {
+                var user = data.users.find(user => user.username === username);
+                if (user) {
+                    var expireDate = new Date(user.expire);
+                    var currentDate = new Date();
+
+                    if (currentDate < expireDate) {
+                        var timeRemaining = expireDate - currentDate;
+                        var daysRemaining = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                        var hoursRemaining = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutesRemaining = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+
+                        var resultMessage = `
+                            Abonamentul tău de tip ${user.subscription_type} mai este valabil timp de ${daysRemaining} zile, ${hoursRemaining} ore, și ${minutesRemaining} minute.<br><br>
+                            Dacă dorești să-ți extinzi durata abonamentului, te rugăm să achiziționezi unul dintre planurile de mai jos.
+                        `;
+
+                        document.getElementById('result').innerHTML = resultMessage;
+                        document.getElementById('result').className = 'callout available';
+                    } else {
+                        var resultMessage = `
+                            Abonamentul tău de tip ${user.subscription_type} a expirat.<br><br>
+                            Te rugăm să consulți planurile tarifare de mai jos pentru a-ți reînnoi abonamentul.
+                        `;
+
+                        document.getElementById('result').innerHTML = resultMessage;
+                        document.getElementById('result').className = 'callout expired';
+                    }
+                } else {
+                    document.getElementById('result').innerHTML = 'Nume de utilizator invalid';
+                    document.getElementById('result').className = 'callout';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</script>
+<head>
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 98%;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+    <br><br>
+<h2 style="text-align:center">Abonamente</h2>
+
+<div class="card">
+    <img src="https://i.imgur.com/Za62f1d.png" alt="Denim Jeans" style="width:100%">
+  <h1>Pe Buget</h1>
+  <p class="price">0,99 RON/Saptamana <br>sau<br>
+    <b>2,99 RON/</b>Luna</p>
+  <p>
+  Stim cat de mult te urasc colegii si profesorii
+  <br>
+  Stim ca in fiecare seara asculti muzica si te tai la vene
+  <br>
+  Si stim ca nu ai prea multi bani in buzunare
+  <br><br>
+Insa cu abonamentul Pe Buget', iti poti <b>etala calitatile masculului alfa din tine!</b><br><br>
+Vei agata <b>gagici</b> mai rapid ca niciodata
+<br><br>
+Iti va creste Social Creditul
+<br><br>
+Si nu in ultimul rand, stima de sine
+<br><br>
+Cu acest abonament, vei <b>obtine acces la Panoul cu Sunete Caterinca</b>, cel mai bombastic soundboard din Iasington
+  </p><br>
+  <p><button>Plata doar CASH</button></p>
+</div>
+<br><br>
+<div class="card">
+    <img src="https://i.imgur.com/sFB1BEc.png" alt="Denim Jeans" style="width:100%">
+  <h1>Pe Sistem</h1>
+  <p class="price">1,99 RON pe Saptamana<br>sau<br> 
+    <b>5,99 RON</b>/Luna</p>
+  <p>
+  Daca esti pe sistem si iti place sa fii mereu la moda
+  <br>
+  Daca vrei sa iesi in evidenta si sa fii cel mai tare
+  <br>
+  Atunci abonamentul Pe Sistem este pentru tine!
+  <br><br>
+  Cu acest abonament, vei avea toate beneficiile abonamentului Pe Buget plus:
+  <br><br>
+  - Acces la TuneScape, cel mai tare joc muzical
+  <br>
+  - Costume exclusive pentru personajul tau in TuneScape
+  <br>
+  - Dedicatii personalizate in timpul emisiunilor
+  </p><br>
+  <p><button>Plata doar CASH</button></p>
+</div>
+<br><br>
+<div class="card">
+    <img src="https://i.imgur.com/PYZuvDn.png" alt="Denim Jeans" style="width:100%">
+  <h1>Pe Smecherie</h1>
+  <p class="price">2,99 RON pe Saptamana<br>sau<br> 
+    <b>9,99 RON</b>/Luna</p>
+  <p>
+  Esti smecher sau vrei sa fii smecher?
+  <br>
+  Vrei sa fii vedeta si sa fii admirat de toti?
+  <br>
+  Atunci abonamentul Pe Smecherie este pentru tine!
+  <br><br>
+  Cu acest abonament, vei avea toate beneficiile abonamentelor Pe Buget si Pe Sistem plus:
+  <br><br>
+  - Acces la Copiuta Fermecata, aplicatia care iti aduce noroc si succes
+  <br>
+  - Exclusivitati la evenimentele speciale organizate de noi
+  <br>
+  - Intalniri VIP cu ceilalti abonati Pe Smecherie
+  </p><br>
+  <p><button>Plata doar CASH</button></p>
+</div>
+<br><br><br>
+</body>
+</html>
+
+
+
+
