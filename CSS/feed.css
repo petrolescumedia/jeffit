@@ -1,0 +1,118 @@
+.responsive-image {
+    max-width: none; /* Allow the image to expand beyond its natural size */
+    width: 90%; /* Ensure the image fills its container horizontally */
+    height: auto;
+    display: block; /* Ensures that the image doesn't create extra space below it */
+    margin: 0 auto; /* Center the image horizontally */
+  }
+
+/* Remove focus outline on all elements */
+*:focus {
+    outline: none;
+  }
+  
+      body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+  }
+  
+  .result-container {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+  }
+  
+  .result-card {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      width: 95%;
+      color: white;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .result-title {
+      color: black;
+      font-size: 20px;
+      text-align: left;
+  }
+  
+  .result-text {
+      margin-bottom: 20px;
+      color: black;
+      font-size: 16px;
+  }
+  
+  .result-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 5px;
+  }
+  
+  .result-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+  }
+  
+  .result-like {
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  
+  .result-dislike {
+      padding: 5px 10px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  
+  .home-button-container {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+  }
+  
+  .home-button {
+      padding: 10px 20px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  
+  .post-box {
+      margin: 20px;
+      padding: 10px;
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      max-width: 800px;
+  }
+  
+  .post-button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #00a0cc;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 94%;
+      transition: background-color 0.3s;
+  }
+  
+  .post-button:hover {
+      background-color: #45a049;
+  }

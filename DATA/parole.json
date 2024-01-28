@@ -7,12 +7,6 @@
       "subscription_type": "admin"
     },
     {
-      "username": "Pulache",
-      "password": "pulamare",
-      "expire": "2024-01-30",
-      "subscription_type": "Pe Sistem"
-    },
-    {
       "username": "user1",
       "password": "password1",
       "expire": "2024-01-25",
