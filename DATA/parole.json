@@ -19,6 +19,12 @@
       "subscription_type": "Pe Sistem"
     },
     {
+      "username": "@bugetar",
+      "password": "pebuget",
+      "expire": "2024-01-29",
+      "subscription_type": "Pe Buget"
+    },
+    {
       "username": "@petrolescu",
       "password": "petrol69",
       "expire": "2024-12-30",
